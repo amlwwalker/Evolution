@@ -10,6 +10,6 @@ and defines a creature type.
 #####Contributors:
 
 
-Alex Walker
-Chris Robson - hopefully ;)
+* Alex Walker
+* Chris Robson - hopefully ;)
 
