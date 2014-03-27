@@ -32,7 +32,7 @@ public final class Main {
 			System.out.println("Perfectness: " + creature.getPerfectness());
 			creature.setGenome(God.getInstance().evolveCreature(creature));
 			System.out.println("Old genome: " + currentGenome + "\nNew Genome: " + creature.getGenome());
-			System.out.println("Perfectness: " + creature.getGenome().compareTo(currentGenome));
+			System.out.println("Perfectness: " + creature.getPerfectness());
 		}
 	}
 
