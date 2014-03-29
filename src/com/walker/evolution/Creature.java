@@ -6,6 +6,7 @@ public class Creature {
 
 	private String genome;
 	private String perfectGenome;
+	private int perfectness;
 	public Creature(String perfectGenome){
 		this.perfectGenome = perfectGenome;
 		
@@ -37,8 +38,10 @@ public class Creature {
 		return perfectGenome;
 	}
 	
-	//find out how close the creature is to its perfect form.
 	public int getPerfectness(){
-		return compareTo(getPerfectForm());
+		return perfectness;
+	}
+	public void setPerfectness(int perfectness){
+		this.perfectness= perfectness; 
 	}
 }

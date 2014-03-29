@@ -1,7 +1,11 @@
 package com.walker.evolution;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public final class Main {
 
@@ -18,22 +22,31 @@ public final class Main {
 		 * 
 		 */
 		List<Creature> listOfCreatures = new ArrayList<Creature>();
-		//Creating a creature with the type: f6e622e2ff23483d8861445945d7d987
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 5; i++){
 			Creature creature1 = new Creature("f6e622e2ff23483d8861445945d7d987");
-//			System.out.println("Perfectness: " + creature1.compareTo(creature1.getPerfectForm()));
 			listOfCreatures.add(creature1);
 		}
 
-		
-//		System.out.println(creature2.compareTo("45daf9ef38f94cfa8b4b77562622dc78"));
 		for (Creature creature : listOfCreatures) {
 			String currentGenome = creature.getGenome();
-			System.out.println("Perfectness: " + creature.getPerfectness());
+			God.getInstance().calculatePerfection(creature);
 			creature.setGenome(God.getInstance().evolveCreature(creature));
-			System.out.println("Old genome: " + currentGenome + "\nNew Genome: " + creature.getGenome());
-			System.out.println("Perfectness: " + creature.getPerfectness());
+			System.out.println("Old genome: " + currentGenome + "\nNew Genome: " + creature.getGenome() + " Perfection: " + God.getInstance().calculatePerfection(creature));
+			creature.setPerfectness(God.getInstance().calculatePerfection(creature));
 		}
+		
+		int best = listOfCreatures.get(0).getPerfectness();
+		Creature newCreature = listOfCreatures.get(0);
+		for (Creature creature : listOfCreatures) {
+			System.out.println("Perfectness: " + creature.getPerfectness() + " Best: " + best);
+			if (creature.getPerfectness() < best){
+				best = creature.getPerfectness();
+				newCreature = creature;
+			}
+		}
+		System.out.println("Best: " + best);
+		//now we have a new creature
+		//one option is to just kill the worst creature.
 	}
 
 }
