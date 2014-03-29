@@ -17,24 +17,23 @@ public final class Main {
 		 * "perfect form" defines its type. The evolution of a creature will
 		 * always head for that perfection.
 		 */
-		List<Creature> listOfCreatures = new ArrayList<Creature>();
 		List<Creature> listOfParents = new ArrayList<Creature>();
 		List<Creature> listOfChildren = new ArrayList<Creature>();
 
 		listOfParents = God.getInstance().performMiracle(
 				"f6e622e2ff23483d8861445945d7d987");
-
-		for (int i = 0; i < 5; i++) { // do for 5 generations
+		int bestCreature = 0;
+		for (int i = 0; i < 20; i++) { // do for 5 generations
 
 			for (Creature creature : listOfParents) {
 
 				God.getInstance().evolveCreature(creature, 3);
 
-				System.out.println("Genome: " + creature.getGenome()
-						+ "\nChildG: "
-						+ creature.getChildren().get(0).getGenome()
-						+ " Perfection: "
-						+ God.getInstance().calculatePerfection(creature));
+//				System.out.println("Genome: " + creature.getGenome()
+//						+ "\nChildG: "
+//						+ creature.getChildren().get(0).getGenome()
+//						+ " Perfection: "
+//						+ God.getInstance().calculatePerfection(creature));
 				creature.setPerfectness(God.getInstance().calculatePerfection(
 						creature));
 				God.getInstance().killWorstChild(creature);
@@ -58,7 +57,12 @@ public final class Main {
 						minimum = creature.getPerfectness();
 					}
 			}
-			System.out.println("MIN: " + minimum);
+			bestCreature = minimum;
+			if (bestCreature < 300){ //break if a creature is within 400 of the perfect genome
+				System.out.println("breaking:\n");
+				System.out.println("Generation: " + i + " Number of Creatures: " + listOfParents.size() + " best Genome: " + bestCreature);
+				break;
+			}
 		}
 
 		// now we have a new creature
