@@ -68,11 +68,8 @@ public class God {
 			if (creature.getPerfectness() > worst) {
 				worst = creature.getPerfectness();
 				newCreature = creature;
-//				System.out.println("Perfectness: " + creature.getPerfectness()
-//						+ " Worst: " + worst);
 			}
 		}
-		System.out.println("Worst: " + worst);
 		children.remove(newCreature);
 	}
 	

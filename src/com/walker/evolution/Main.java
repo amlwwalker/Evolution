@@ -19,19 +19,21 @@ public final class Main {
 		// An amount of Generations to calculate
 		for (Species species : listOfSpecies) {
 
+			for (int i = 0; i < 20; i++){
 				species.copulate(3);
 				bestCreature = species.bestChild();
 				species.prepForNextGen();
 
 				if (bestCreature < 300) { // break if a creature is within 400
 											// of the perfect genome
-					break;
-				}
 				System.out.println("breaking:\n");
-				System.out.println("Generation: " + 0
+				System.out.println("Generation: " + i
 						+ " Number of Creatures: "
 						+ species.getPopulation().size() + " best Genome: "
 						+ bestCreature);
+				break;
+				}
+			}
 		}
 
 	}

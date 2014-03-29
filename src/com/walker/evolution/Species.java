@@ -45,7 +45,6 @@ public class Species {
 		//Find the best child of the generation
 		int minimum = listOfChildren.get(0).getPerfectness();
 		for (Creature creature : listOfChildren) {
-			System.out.println(creature.getPerfectness());
 				if (creature.getPerfectness() < minimum){
 					minimum = creature.getPerfectness();
 				}
