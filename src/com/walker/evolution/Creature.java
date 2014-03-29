@@ -1,5 +1,7 @@
 package com.walker.evolution;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Creature {
@@ -7,11 +9,18 @@ public class Creature {
 	private String genome;
 	private String perfectGenome;
 	private int perfectness;
-	public Creature(String perfectGenome){
-		this.perfectGenome = perfectGenome;
-		
+	private List<Creature> listOfChildren= new ArrayList<Creature>();
+	
+//	Can create a Creature from a ranom genome, or can create one by passing in a genome.
+//	All creatures need a perfect Genome.
+	public Creature(){
 		genome = UUID.randomUUID().toString().replace("-", "");
-//		System.out.println("new Creature = " + perfectGenome);
+	}
+	public Creature (String genome){
+		this.genome = genome;
+	}
+	public void setPerfectGenome(String perfectGenome){
+		this.perfectGenome = perfectGenome;
 	}
 	
 	//comparing two creatures for likeness.
@@ -43,5 +52,11 @@ public class Creature {
 	}
 	public void setPerfectness(int perfectness){
 		this.perfectness= perfectness; 
+	}
+	public void addChild(Creature c){
+		listOfChildren.add(c);
+	}
+	public List<Creature> getChildren(){
+		return listOfChildren;
 	}
 }
