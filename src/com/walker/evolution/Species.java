@@ -5,23 +5,24 @@ import java.util.List;
 
 public class Species {
 
-	private String perfectGenome;
 	/*
 	 * We will always have children and parents. Except the first time
 	 * when God performs a miracle.
 	 */
 	private List<Creature> listOfParents = new ArrayList<Creature>();
 	private List<Creature> listOfChildren = new ArrayList<Creature>();
+	private Genetics perfectGenetics;
+	private Creature bestCreature;
 	
 	public Species(String perfectGenome){
-		this.perfectGenome = perfectGenome;
+		perfectGenetics = new Genetics(perfectGenome);
 		
 		/*
 		 * God is performing a miracle. A seed genome is fed in
 		 * as the "perfect Genome"
 		 */
 		listOfParents = God.getInstance().performMiracle(
-				perfectGenome);
+				this);
 		
 	}
 	public void copulate(int childCount){
@@ -47,6 +48,7 @@ public class Species {
 		for (Creature creature : listOfChildren) {
 				if (creature.getPerfectness() < minimum){
 					minimum = creature.getPerfectness();
+					bestCreature = creature;
 				}
 		}
 		return minimum;
@@ -60,12 +62,15 @@ public class Species {
 		listOfChildren.clear();
 	}
 	public String getPerfectGenome() {
-		return perfectGenome;
+		return perfectGenetics.getGenetics();
 	}
-	public void setPerfectGenome(String perfectGenome) {
-		this.perfectGenome = perfectGenome;
+	public Genetics getPerfectGenetics() {
+		return perfectGenetics;
 	}
 	public List<Creature> getPopulation() {
 		return listOfParents;
+	}
+	public Creature getBestCreature() {
+		return bestCreature;
 	}
 }

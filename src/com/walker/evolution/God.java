@@ -16,7 +16,7 @@ public class God {
 	 * Parent A property *0.5 + Parent B property * 0.5
 	 */
 	private static God instance = null;
-	private String alphanumricCharacters = "abcdefghijklmnopqrstuvwxyz0123456789";
+	private String alphanumricCharacters = "0123456789abcdef";
 
 	protected God() {
 	}
@@ -35,14 +35,13 @@ public class God {
 		for (int i = 0; i < number; i++){
 			
 		int characterToChange = (int) (Math.random() * currentGenome.length());
-		int newCharacter = (int) (Math.random() * 36);
+		int newCharacter = (int) (Math.random() * 16);
 		String temp = alphanumricCharacters.substring(newCharacter,
 				newCharacter + 1);
 		characters[characterToChange] = temp.toCharArray()[0];
 		String valueOf = new String(characters);
-
-		Creature child = new Creature(valueOf);
-		child.setPerfectGenome(creature.getPerfectForm());
+		
+		Creature child = new Creature(creature.getSpecies(), valueOf);
 		child.setPerfectness(God.getInstance().calculatePerfection(child));
 		creature.addChild(child);
 		}
@@ -51,7 +50,7 @@ public class God {
 	public int calculatePerfection(Creature creature) {
 
 		char[] genome = creature.getGenome().toCharArray();
-		char[] perfection = creature.getPerfectForm().toCharArray();
+		char[] perfection = creature.getSpecies().getPerfectGenome().toCharArray();
 		int total = 0;
 		for (int i = 0; i < creature.getGenome().length(); i++) {
 			total += Math.pow(Math.pow(perfection[i] - genome[i], 2), 0.5);
@@ -73,12 +72,11 @@ public class God {
 		children.remove(newCreature);
 	}
 	
-	public List<Creature> performMiracle(String perfectGenome){
+	public List<Creature> performMiracle(Species species){
 		List<Creature> listOfFirstGens = new ArrayList<Creature>();
 		
 		for (int i = 0; i < 5; i++){
-			Creature creature = new Creature();
-			creature.setPerfectGenome(perfectGenome);
+			Creature creature = new Creature(species);
 			listOfFirstGens.add(creature);
 		}
 		return listOfFirstGens;

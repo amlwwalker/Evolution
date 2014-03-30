@@ -6,46 +6,36 @@ import java.util.UUID;
 
 public class Creature {
 
-	private String genome;
-	private String perfectGenome;
+//	private String genome;
+//	private String perfectGenome;
 	private int perfectness;
+	private Genetics genetics;
+//	private Genetics perfectGenetics;
+	private Species species;
 	private List<Creature> listOfChildren= new ArrayList<Creature>();
 	
 //	Can create a Creature from a ranom genome, or can create one by passing in a genome.
 //	All creatures need a perfect Genome.
-	public Creature(){
-		genome = UUID.randomUUID().toString().replace("-", "");
+	public Creature(Species species){
+		this.species = species;
+		genetics = new Genetics(UUID.randomUUID().toString().replace("-", ""));
 	}
-	public Creature (String genome){
-		this.genome = genome;
+	public Creature (Species species, String genome){
+		this.species = species;
+		genetics = new Genetics(genome);
 	}
-	public void setPerfectGenome(String perfectGenome){
-		this.perfectGenome = perfectGenome;
-	}
+//	public void setPerfectGenome(String perfectGenome){
+//		perfectGenetics = new Genetics(perfectGenome);
+//	}
 	
-	//comparing two creatures for likeness.
-	public int compareTo(Creature creature){
-		 String creatureIdentity = creature.genome;
-	      int result = genome.compareTo(creatureIdentity);
-	      return result;
-	}
-	//compare the genome of two creatures
-	public int compareTo(String genome){
-		int result = this.genome.compareTo(genome);
-		return result;
-	}
 	//get a creatures genome
 	public String getGenome(){
-		return genome;
-	}
-	//set a creatures genome (God)
-	public void setGenome(String string){
-		genome = string;
+		return genetics.getGenetics();
 	}
 	//get the perfect form of this creature type
-	public String getPerfectForm(){
-		return perfectGenome;
-	}
+//	public String getPerfectForm(){
+//		return perfectGenetics.getGenetics();
+//	}
 	
 	public int getPerfectness(){
 		return perfectness;
@@ -58,5 +48,11 @@ public class Creature {
 	}
 	public List<Creature> getChildren(){
 		return listOfChildren;
+	}
+	public Genetics getGenetics() {
+		return genetics;
+	}
+	public Species getSpecies() {
+		return species;
 	}
 }
