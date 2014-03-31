@@ -50,6 +50,7 @@ public class SexualSpecies extends Species {
 		for (Creature c : offspring) {
 			//test for evolution...
 		}
+		listOfChildren.addAll(offspring);
 	}
 	private Genetics mergeGenes(Genetics g1, Genetics g2){
 		Genetics genetics = new Genetics((g1.getGenetics() + g2.getGenetics()));
@@ -66,13 +67,12 @@ public class SexualSpecies extends Species {
 		for (SexualCreature c : getParents()) {
 			c.isMated(false);
 		}
-	//	listOfParents.addAll(listOfChildren);
+		listOfParents.addAll(listOfChildren);
 		//findMates();
 	}
 	public void findMates(){
 		Random randomizer = new Random();
 		for (SexualCreature c : listOfParents) {
-			System.out.println(c.isMated());
 			if(c.isMated()){
 				System.out.println("Is Mated! " + c.toString());
 				continue;
@@ -119,7 +119,8 @@ public class SexualSpecies extends Species {
 		Iterator it = partners.entrySet().iterator();
 		while (it.hasNext()){
 			Map.Entry pairs = (Map.Entry)it.next();
-			System.out.println("hello: " + pairs.getKey().toString() + " : " + pairs.getValue().toString());
+			reproduce((SexualCreature) pairs.getKey(), (SexualCreature) pairs.getValue());
+//			System.out.println("hello: " + pairs.getKey().toString() + " : " + pairs.getValue().toString());
 			it.remove();
 		}
 		prepForNextGen();
