@@ -64,27 +64,27 @@ public class SexualSpecies extends Species {
 		 * A child becomes a parent when it gets children.
 		 */
 		for (SexualCreature c : getParents()) {
-			SexualCreature sC = (SexualCreature) c;
-			sC.isMated(false);
+			c.isMated(false);
 		}
-		listOfParents.addAll(listOfChildren);
-		findMates();
+	//	listOfParents.addAll(listOfChildren);
+		//findMates();
 	}
 	public void findMates(){
 		Random randomizer = new Random();
 		for (SexualCreature c : listOfParents) {
+			System.out.println(c.isMated());
 			if(c.isMated()){
-				System.out.println("Is Mated!");
+				System.out.println("Is Mated! " + c.toString());
 				continue;
 			}
 			SexualCreature random = listOfParents.get(randomizer.nextInt(listOfParents.size()));
 			if (!random.isMated() && c.getSex() != random.getSex()){ //if the potential mate is not of the same sex and is not already mated.
-				System.out.println("Found a Mate!");
+				System.out.println("Found a Mate! " + c.toString() + " : " + random.toString());
 				c.setMate(random);
 				random.setMate(c);
 				partners.put(c, random);
 			} else {
-				System.out.println("Didnt Find a mate.");
+				System.out.println("Didnt Find a mate. "  + c.toString());
 			}
 		}
 	}
@@ -122,6 +122,7 @@ public class SexualSpecies extends Species {
 			System.out.println("hello: " + pairs.getKey().toString() + " : " + pairs.getValue().toString());
 			it.remove();
 		}
+		prepForNextGen();
 	}
 
 }

@@ -18,6 +18,7 @@ public class SexualCreature extends Creature{
 	public SexualCreature(Species species) {
 		super(species);
 		sex = r.random();
+		isMated(false);
 	}
 	public SexualCreature(Species species, Genetics genetics){
 		super(species, genetics);
@@ -44,9 +45,7 @@ public class SexualCreature extends Creature{
         }
     }
 	public boolean isMated(){
-		boolean temp = isMated;
-		isMated = !isMated;
-		return temp;
+		return isMated;
 	}
 	public void isMated(boolean isMated){
 		this.isMated = isMated;
