@@ -28,11 +28,10 @@ public class God {
 		return instance;
 	}
 
-	public void evolveCreature(Creature creature, int number) {
+	public Genetics evolveGenetics(Genetics genetics) {
 
-		String currentGenome = creature.getGenome();
+		String currentGenome = genetics.getGenetics();
 		char[] characters = currentGenome.toCharArray();
-		for (int i = 0; i < number; i++){
 			
 		int characterToChange = (int) (Math.random() * currentGenome.length());
 		int newCharacter = (int) (Math.random() * 16);
@@ -41,10 +40,7 @@ public class God {
 		characters[characterToChange] = temp.toCharArray()[0];
 		String valueOf = new String(characters);
 		
-		Creature child = new Creature(creature.getSpecies(), valueOf);
-		child.setPerfectness(God.getInstance().calculatePerfection(child));
-		creature.addChild(child);
-		}
+		return new Genetics(valueOf);
 	}
 
 	public int calculatePerfection(Creature creature) {
@@ -72,11 +68,11 @@ public class God {
 		children.remove(newCreature);
 	}
 	
-	public List<Creature> performMiracle(Species species){
-		List<Creature> listOfFirstGens = new ArrayList<Creature>();
+	public List<ASexualCreature> performMiracle(Species species){
+		List<ASexualCreature> listOfFirstGens = new ArrayList<ASexualCreature>();
 		
-		for (int i = 0; i < 5; i++){
-			Creature creature = new Creature(species);
+		for (int i = 0; i < 1; i++){
+			ASexualCreature creature = new ASexualCreature(species);
 			listOfFirstGens.add(creature);
 		}
 		return listOfFirstGens;

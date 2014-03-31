@@ -6,37 +6,26 @@ import java.util.UUID;
 
 public class Creature {
 
-//	private String genome;
-//	private String perfectGenome;
 	private int perfectness;
 	private Genetics genetics;
-//	private Genetics perfectGenetics;
 	private Species species;
 	private List<Creature> listOfChildren= new ArrayList<Creature>();
 	
-//	Can create a Creature from a ranom genome, or can create one by passing in a genome.
+//	Can create a Creature from a random genome, or can create one by passing in a genome.
 //	All creatures need a perfect Genome.
 	public Creature(Species species){
 		this.species = species;
 		genetics = new Genetics(UUID.randomUUID().toString().replace("-", ""));
 	}
-	public Creature (Species species, String genome){
+	public Creature (Species species, Genetics genetics){
 		this.species = species;
-		genetics = new Genetics(genome);
+		this.genetics = genetics;
 	}
-//	public void setPerfectGenome(String perfectGenome){
-//		perfectGenetics = new Genetics(perfectGenome);
-//	}
 	
 	//get a creatures genome
 	public String getGenome(){
 		return genetics.getGenetics();
 	}
-	//get the perfect form of this creature type
-//	public String getPerfectForm(){
-//		return perfectGenetics.getGenetics();
-//	}
-	
 	public int getPerfectness(){
 		return perfectness;
 	}

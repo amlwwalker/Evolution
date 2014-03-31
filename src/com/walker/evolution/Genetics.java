@@ -41,13 +41,15 @@ public class Genetics {
 		properties.add("Jealousy"); //potential for killing a more successful hunter
 		properties.add("tactics"); //understanding of group work
 		properties.add("Kindness"); //chance that will give away food to others, affected by other persons strength and kindness
+		properties.add("Fertility"); //Capability of having offspring
+		properties.add("Sexuality"); //Capability of having offspring
 	}
 	
 	public List<String> getProperties(){
 		return properties;
 	}
 	public String getProperty(String property){
-		return DNA.get("Jealousy") + DNA.get("Kindness") + DNA.get(property) + DNA.get(property);
+		return DNA.get(property);
 	}
 	public int getPropertyAsValue(String property, String perfection){
 		char[] genome = property.toCharArray();
