@@ -9,7 +9,11 @@ public abstract class Species {
 	 * We will always have children and parents. Except the first time
 	 * when God performs a miracle.
 	 */
+	List<Creature> listOfParents = new ArrayList<Creature>();
+	List<Creature> listOfChildren = new ArrayList<Creature>();
 	private Genetics perfectGenetics;
+	protected Enviroment enviroment;
+	
 	public Species(String perfectGenome){
 		perfectGenetics = new Genetics(perfectGenome);
 		/*
@@ -41,4 +45,15 @@ public abstract class Species {
 	public abstract void prepForNextGen();
 	public abstract Species evolveSpecies();
 	public abstract void initiateReproduction();
+	public abstract List<?> getChildren();
+	public abstract List<?> getParents();
+
+	public Enviroment getEnviroment() {
+		return enviroment;
+	}
+
+	public void setEnviroment(Enviroment enviroment) {
+		this.enviroment = enviroment;
+	}
+	
 }

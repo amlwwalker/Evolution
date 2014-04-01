@@ -2,9 +2,7 @@ package com.walker.evolution;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public final class Main {
 
@@ -15,6 +13,7 @@ public final class Main {
 
 		int bestCreature = 0;
 		List<Species> listOfSpecies = new ArrayList<Species>();
+		Enviroment e = new Enviroment("f6e622e2ff23483d8861445945d7d987");
 
 		Species asexualSpecies = new AsexualSpecies(
 				"f6e622e2ff23483d8861445945d7d987");
@@ -23,11 +22,22 @@ public final class Main {
 				"f6e622e2ff23483d8861445945d12345");
 		listOfSpecies.add(sexualSpecies);
 
-		Set<Species> newSpecies = new HashSet<Species>();
+		asexualSpecies.setEnviroment(e);
+		sexualSpecies.setEnviroment(e);
+		for (int i = 0; i < 5; i++){
+			
 			for (Species species : listOfSpecies) {
 				
 				species.initiateReproduction();
 			}
+		}
+		
+		for (Species species : listOfSpecies) {
+			
+			int size = species.getParents().size() + species.getChildren().size();
+			System.out.println("Population = " + size);
+		}
+
 		// An amount of Generations to calculate
 		// for (int i = 0; i < 15; i++) {
 		// species.reproduce(creature);

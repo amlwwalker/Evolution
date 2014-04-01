@@ -16,6 +16,7 @@ public class Creature {
 	public Creature(Species species){
 		this.species = species;
 		genetics = new Genetics(UUID.randomUUID().toString().replace("-", ""));
+//		genetics = new Genetics("f6e622e2ff23483d8861445945d12345");
 	}
 	public Creature (Species species, Genetics genetics){
 		this.species = species;

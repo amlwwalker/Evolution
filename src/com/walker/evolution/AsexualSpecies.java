@@ -3,15 +3,15 @@ package com.walker.evolution;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.Environment;
+
 public class AsexualSpecies extends Species {
 	
 	//one evolved species per asexual species.
 	private SexualSpecies evolvedSpecies = null;
-	protected List<ASexualCreature> listOfParents = new ArrayList<ASexualCreature>();
-	protected List<ASexualCreature> listOfChildren = new ArrayList<ASexualCreature>();
 	public AsexualSpecies(String perfectGenome) {
 		super(perfectGenome);
-		listOfParents = God.getInstance().performMiracle(
+		listOfParents = (List<Creature>)(List<?>) God.getInstance().performMiracle(
 				this);
 	}
 
@@ -19,30 +19,13 @@ public class AsexualSpecies extends Species {
 //		asexual species reproduce by mitosis;
 //		I.e they copy themselves
 //		God can choose to evolve the produced version.
-		System.out.println("Reproducing ASexually");
-		List<ASexualCreature> offspring = new ArrayList<ASexualCreature>();
-		for (int i = 0; i < 2; i++){
-			offspring.add(new ASexualCreature(this, God.getInstance().evolveGenetics(((Creature) creature).getGenetics())));
+		boolean testFertility = testFertility(creature);
+		if (!testFertility)
+			return;
+		for (int i = 0; i < 6; i++){
+//			if (getEnviroment().getBirthSuccess(creature.getGenetics().getProperty("Fertility")));
+			listOfChildren.add(new ASexualCreature(this, God.getInstance().evolveGenetics(((Creature) creature).getGenetics())));
 		}
-		
-		
-		//need to test whether any of the offspring evolved to the point where in fact they are of a different species.
-		//changing from one class type to another basically.
-		
-//		for (ASexualCreature c : offspring) {
-//			// if the creatures sexuality matches perfect then it no
-//			// longer breeds through mitosis and needs two parents
-//			if (getPerfectGenetics()
-//							.getProperty("Sexuality")
-//							.equals(c.getGenetics()
-//									.getProperty("Sexuality"))) {
-//				createEvolvedSpecies().getParents()
-//						.add(
-//);
-//			} else {
-//				getChildren().add(c);
-//			}
-//		}
 	}
 
 	public SexualSpecies createEvolvedSpecies(){ 
@@ -67,16 +50,6 @@ public class AsexualSpecies extends Species {
 			listOfChildren.clear();
 		}
 
-	public List<ASexualCreature> getParents() {
-		// TODO Auto-generated method stub
-		return listOfParents;
-	}
-
-	public List<ASexualCreature> getChildren() {
-		// TODO Auto-generated method stub
-		return listOfChildren;
-	}
-
 	@Override
 	public Species evolveSpecies() {
 		// TODO Auto-generated method stub
@@ -89,12 +62,38 @@ public class AsexualSpecies extends Species {
 		/*
 		 * Loop through all the parents and start reproducing.
 		 */
-		for (ASexualCreature c : listOfParents) {
+		List<ASexualCreature> temp = (List<ASexualCreature>)(List<?>) listOfParents;
+		System.out.println("ASexual Species:\n");
+		for (ASexualCreature c : temp) {
 			reproduce(c);
 		}
+		prepForNextGen();
+		for (ASexualCreature c : temp) {
+		}
+		System.out.println();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<ASexualCreature> getParents() {
+		// TODO Auto-generated method stub
+		return (List<ASexualCreature>)(List<?>) listOfParents;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ASexualCreature> getChildren() {
+		// TODO Auto-generated method stub
+		return (List<ASexualCreature>)(List<?>) listOfChildren;
+	}
+	private boolean testFertility(ASexualCreature creature){
+		double enviromentQuality = enviroment.getBirthSuccess(creature.getGenetics().getProperty("Fertility"));
+		if (enviromentQuality < 0.5){
+			return true;
+		}
+		return false;
+	}
 }
+
 
 /*
 {

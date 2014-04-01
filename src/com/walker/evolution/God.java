@@ -71,7 +71,7 @@ public class God {
 	public List<ASexualCreature> performMiracle(Species species){
 		List<ASexualCreature> listOfFirstGens = new ArrayList<ASexualCreature>();
 		
-		for (int i = 0; i < 1; i++){
+		for (int i = 0; i < 2; i++){
 			ASexualCreature creature = new ASexualCreature(species);
 			listOfFirstGens.add(creature);
 		}

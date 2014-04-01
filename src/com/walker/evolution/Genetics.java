@@ -42,10 +42,15 @@ public class Genetics {
 		properties.add("tactics"); //understanding of group work
 		properties.add("Kindness"); //chance that will give away food to others, affected by other persons strength and kindness
 		properties.add("Fertility"); //Capability of having offspring
-		properties.add("Sexuality"); //Capability of having offspring
+		/*
+		 * possibly so a creature can evolve into another creature
+		 * i.e if its "Species" property changes to another
+		 * it becomes that
+		 */
+		properties.add("Species");
 	}
-	
 	public List<String> getProperties(){
+	
 		return properties;
 	}
 	public String getProperty(String property){

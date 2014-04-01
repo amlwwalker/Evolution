@@ -1,5 +1,6 @@
 package com.walker.evolution;
 
+import java.util.List;
 import java.util.Random;
 
 
@@ -26,7 +27,6 @@ public class SexualCreature extends Creature{
 	}
 	public void setMate(Creature mate){
 		this.mate = mate;
-		isMated = true;
 	}
 	public Creature getMate(){
 		return mate;
